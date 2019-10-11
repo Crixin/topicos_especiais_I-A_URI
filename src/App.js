@@ -59,7 +59,6 @@ function App() {
         <Button variant="contained" color="primary"  onClick={ () => buscaFilmes() }>
         Busca
         </Button>
-        <Button variant="contained" color="secondary">Favoritos</Button>
       </Container>
         
       <div style={{float:"left"}}>
