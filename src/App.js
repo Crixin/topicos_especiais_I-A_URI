@@ -5,7 +5,6 @@ import { Input } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 
-
 function App() {
   
   const [posts, setPosts] = useState([])
@@ -54,31 +53,48 @@ function App() {
   
   return (
     <>
-    <Container maxWidth="sm">
-      <Box my={4}>
+      
+      <Container maxWidth="sm">
         <Input id="titulo"></Input>
         <Button variant="contained" color="primary"  onClick={ () => buscaFilmes() }>
         Busca
         </Button>
         <Button variant="contained" color="secondary">Favoritos</Button>
+      </Container>
+        
+      <div style={{float:"left"}}>
+        <h2>Lista de filmes</h2>
+        <ul>
+          { posts && posts.map(post =>{
+            return <li key={post.imdbID} >
+            Title: {post.Title}<br/>
+            Ano lançamento: {post.Year}<br/>
+            <img src={post.Poster}></img><br></br>
+            {post.like && 
+              <span>Favoritado!</span>
+            }
+            <Button variant="contained" color="secondary" onClick={(e) => handleClick(post.imdbID)}> Favoritar </Button>
+            </li>
+            
+          }) 
+          }
+          </ul>
+        </div>
+
+        <div style={{float:"right"}}>
+        <h2>Lista de favoritos</h2>
 
         <ul>
-        { posts && posts.map(post =>{
-          return <li key={post.imdbID} >
-          Title: {post.Title}<br/>
-          Ano lançamento: {post.Year}<br/>
-          <img src={post.Poster}></img><br></br>
-          {post.like && 
-            <span>Favoritado!</span>
+          { favoritos && favoritos.map(post =>{
+            return <li key={post.imdbID} >
+            Title: {post.Title}<br/>
+            Ano lançamento: {post.Year}<br/>
+            <img src={post.Poster}></img><br></br>
+            </li>
+          }) 
           }
-          <Button variant="contained" color="secondary" onClick={(e) => handleClick(post.imdbID)}> Favoritar </Button>
-          </li>
-          
-        }) 
-        }
-        </ul>
-      </Box>
-    </Container>
+          </ul>
+        </div>
     </> 
     );
   }
